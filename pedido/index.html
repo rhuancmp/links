@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47Z7JYXBLD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-47Z7JYXBLD');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -14,8 +22,6 @@
     <meta property="og:image:width" content="1080">
     <meta property="og:image:height" content="1350">
 
-    <meta http-equiv="refresh" content="0; url=https://delivery.softwarebistro.com.br/pizzariaboamassa">
-
     <style>
         body { font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
         .loader { text-align: center; color: #ab0000; }
@@ -28,9 +34,33 @@
     </div>
 
     <script>
+        // 1. Lemos o parâmetro na URL (ex: ?s=status)
+        const urlParams = new URLSearchParams(window.location.search);
+        const origem = urlParams.get('s');
+
+        // 2. Definimos as variáveis base (acesso direto sem parâmetro)
+        let utmSource = 'direto';
+        let utmMedium = 'link';
+
+        // 3. Mapeamos a origem baseada no parâmetro
+        if (origem === 'status') {
+            utmSource = 'whatsapp';
+            utmMedium = 'status';
+        } else if (origem === 'msg') {
+            utmSource = 'whatsapp';
+            utmMedium = 'mensagem_direta';
+        } else if (origem === 'insta') {
+            utmSource = 'instagram';
+            utmMedium = 'bio_ou_stories';
+        }
+
+        // 4. Montamos o link final com as UTMs direcionando para o Software Bistro
+        const linkFinal = `https://delivery.softwarebistro.com.br/pizzariaboamassa?utm_source=${utmSource}&utm_medium=${utmMedium}&utm_campaign=pedido_direto`;
+
+        // 5. Redirecionamento após 1.2s para o Google Analytics conseguir registrar o acesso
         setTimeout(function() {
-            window.location.href = "https://delivery.softwarebistro.com.br/pizzariaboamassa";
-        }, 500);
+            window.location.href = linkFinal;
+        }, 1200);
     </script>
 </body>
 </html>
