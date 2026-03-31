@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47Z7JYXBLD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-47Z7JYXBLD');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -9,12 +17,10 @@
     <meta property="og:title" content="🍕 Cardápio Online - Pizzaria Boa Massa">
     <meta property="og:description" content="Clique para ver nossas pizzas, promoções e fazer seu pedido agora mesmo!">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://link.pizzariaboamassa.com.br/cardapio">
+    <meta property="og:url" content="https://link.pizzariaboamassa.com/cardapio">
     <meta property="og:image" content="https://i.ibb.co/s9gcF8FM/Estetiko-post-e-carrossel.png">
     <meta property="og:image:width" content="1080">
     <meta property="og:image:height" content="1350">
-
-    <meta http-equiv="refresh" content="0; url=https://pizzariaboamassa.com/cardapio">
 
     <style>
         body { font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
@@ -28,10 +34,33 @@
     </div>
 
     <script>
-        // Redirecionamento via JavaScript como backup do meta-refresh
+        // 1. Lemos o parâmetro na URL (ex: ?s=insta)
+        const urlParams = new URLSearchParams(window.location.search);
+        const origem = urlParams.get('s');
+
+        // 2. Definimos as variáveis base (caso alguém acesse o link sem parâmetro nenhum)
+        let utmSource = 'direto';
+        let utmMedium = 'link';
+
+        // 3. Mapeamos a origem baseada no parâmetro
+        if (origem === 'status') {
+            utmSource = 'whatsapp';
+            utmMedium = 'status';
+        } else if (origem === 'msg') {
+            utmSource = 'whatsapp';
+            utmMedium = 'mensagem_direta';
+        } else if (origem === 'insta') {
+            utmSource = 'instagram';
+            utmMedium = 'bio_ou_stories';
+        }
+
+        // 4. Montamos o link final com as UTMs
+        const linkFinal = `https://pizzariaboamassa.com/cardapio?utm_source=${utmSource}&utm_medium=${utmMedium}&utm_campaign=cardapio_online`;
+
+        // 5. Redirecionamento após 1.2s para o Google Analytics conseguir registrar o acesso
         setTimeout(function() {
-            window.location.href = "https://pizzariaboamassa.com/cardapio";
-        }, 500);
+            window.location.href = linkFinal;
+        }, 1200);
     </script>
 </body>
 </html>
