@@ -54,8 +54,8 @@
             utmMedium = 'bio_ou_stories';
         }
 
-        // 4. Montamos o link final com as UTMs
-        const linkFinal = `https://pizzariaboamassa.com/cardapio?utm_source=${utmSource}&utm_medium=${utmMedium}&utm_campaign=cardapio_online`;
+        // 4. Montamos o link final com as UTMs (usando & para conectar ao show_welcome=true)
+        const linkFinal = `https://pizzariaboamassa.com/cardapio?show_welcome=true&utm_source=${utmSource}&utm_medium=${utmMedium}&utm_campaign=cardapio_online`;
 
         // 5. Redirecionamento após 1.2s para o Google Analytics conseguir registrar o acesso
         setTimeout(function() {
